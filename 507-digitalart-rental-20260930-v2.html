@@ -563,6 +563,29 @@
       margin-bottom: 30px;
     }
 
+    .table-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 10px;
+      padding: 0 4px;
+    }
+
+    .table-top-meta .criteria-text {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .table-top-meta .unit-badge {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #3b3e48;
+      background: #F1EFEA;
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
     .table-responsive {
       overflow-x: auto;
       border-radius: 16px;
@@ -575,6 +598,30 @@
       text-align: right;
       font-size: 0.95rem;
     }
+
+    .tax-table.fixed-layout {
+      table-layout: fixed;
+    }
+
+    .tax-table.fixed-layout th,
+    .tax-table.fixed-layout td {
+      white-space: normal;
+      letter-spacing: -0.01em;
+      padding: 16px 14px;
+    }
+
+    .tax-table.fixed-layout th:nth-child(1),
+    .tax-table.fixed-layout td:nth-child(1) { width: 17%; text-align: center; }
+    .tax-table.fixed-layout th:nth-child(2),
+    .tax-table.fixed-layout td:nth-child(2) { width: 15%; text-align: center; }
+    .tax-table.fixed-layout th:nth-child(3),
+    .tax-table.fixed-layout td:nth-child(3) { width: 17%; }
+    .tax-table.fixed-layout th:nth-child(4),
+    .tax-table.fixed-layout td:nth-child(4) { width: 16%; }
+    .tax-table.fixed-layout th:nth-child(5),
+    .tax-table.fixed-layout td:nth-child(5) { width: 16%; }
+    .tax-table.fixed-layout th:nth-child(6),
+    .tax-table.fixed-layout td:nth-child(6) { width: 19%; }
 
     .tax-table th,
     .tax-table td {
@@ -1143,7 +1190,70 @@
         <h3>소득 구간별 실제 절세·절감 시뮬레이션 (연 550만원 렌탈료 기준)</h3>
         <p class="table-sub">연간 550만원 렌탈료를 사업소득 필요경비로 반영했을 때의 법정 절감 산출액</p>
 
+        <!-- [적용 중] 소수점 1자리/만원 단위 최적화 표 (900px 및 모바일 최적화) -->
+        <div class="table-top-meta">
+          <span class="criteria-text">※ 연간 렌탈료 550만원 전액 경비 반영 기준</span>
+          <span class="unit-badge">(단위: 만원)</span>
+        </div>
         <div class="table-responsive">
+          <table class="tax-table fixed-layout">
+            <thead>
+              <tr>
+                <th>당기순이익<br>(종합 소득 금액)</th>
+                <th>적용 세율<br>(지방세 포함)</th>
+                <th>종합 소득세<br>절감액</th>
+                <th>건강 보험료<br>절감액</th>
+                <th>장기 요양 보험료<br>절감액</th>
+                <th class="total-col">총 실질 혜택<br>(합계 절감액)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>5,000 만원</td>
+                <td>16.5%</td>
+                <td>90.8</td>
+                <td>39.5</td>
+                <td>5.2</td>
+                <td class="total-col">135.5</td>
+              </tr>
+              <tr>
+                <td>1억원</td>
+                <td>38.5%</td>
+                <td>211.8</td>
+                <td>39.5</td>
+                <td>5.2</td>
+                <td class="total-col">256.5</td>
+              </tr>
+              <tr>
+                <td>3억원</td>
+                <td>41.8%</td>
+                <td>229.9</td>
+                <td>39.5</td>
+                <td>5.2</td>
+                <td class="total-col">274.6</td>
+              </tr>
+              <tr>
+                <td>5억원</td>
+                <td>44.0%</td>
+                <td>242.0</td>
+                <td>39.5</td>
+                <td>5.2</td>
+                <td class="total-col">286.7</td>
+              </tr>
+              <tr style="background: rgba(30,125,93,0.06);">
+                <td><strong>10억원</strong></td>
+                <td>46.2%</td>
+                <td><strong>254.1</strong></td>
+                <td>39.5</td>
+                <td>5.2</td>
+                <td class="total-col" style="font-size:1.1rem; color:var(--green-point);"><strong>298.8</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- [히든 보관] 기존 풀 금액 표 (추후 원복 요청 시 style="display:none;" 제거 후 사용) -->
+        <div class="table-responsive" style="display: none;" id="legacy-full-tax-table">
           <table class="tax-table">
             <thead>
               <tr>
